@@ -20,13 +20,4 @@ My CO-OP experience has been as enlightening as my classes. I have worked at EST
 
 I am motivated by this project partly because it is a requirement to graduate, but also the experience I will gain throughout its completion. Working with drones and computer vision sounds very interesting to me because I have always liked drones and have never worked with computer vision. Automating the movements of a drone to play a board game will be really interesting, especially the algorithms involved with automating the actual game playing. Its also nice to work on a new project outside of the same old stuff at work. I'm curious about how many unforeseen technical challenges we will find. I enjoy solving problems and I am sure this project will contain many different problems to solve.
 
-!TODO preliminary approach
-
-
-–Discuss your preliminary approach to designing a solution –Discuss what your expected results and accomplishments will be –Discuss how you will evaluate your contributions: how will you know when you are done and whether or not you have done a good job?
-
-• Requirement: Minimum 6 sentences per paragraph
-
-Submission should be on BB as well as an included file in your team project repository.
-
-It is recommended that you create a subdirectory in your repo to hold all homework essays.
+Initially we are planning on trying cameras as the way to collect real time data of the drone's state. With this data we should be able to determine the drone's position, yaw, pitch, and whatever else we may need. I expect this to work and be usable for the end goal of the drone playing a board game. To evaluate contributions we will break the project down into tasks and assign them to team members. As we progress on our tasks we will use a review process for everyone's work. For the software tasks we will use a code review format in GitHub and for any other tasks we will use a discussion review that is in person.
