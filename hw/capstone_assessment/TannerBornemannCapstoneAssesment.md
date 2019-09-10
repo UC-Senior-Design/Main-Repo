@@ -18,12 +18,10 @@ My CO-OP experience has been as enlightening as my classes. I have worked at EST
 
 ## Motivation & Project Approach
 
-I am motivated by this project partly because it is a requirement to graduate, but also the experience I will gain throughout its completion. Working with drones and computer vision sounds very interesting to me because I have always liked drones and have never worked with computer vision. Automating the movements of a drone to play a board game will be really interesting, especially the algorithms involved with automating the actual game playing. Its also nice to work on a new project outside of the same old stuff at work.
-!TODO
+I am motivated by this project partly because it is a requirement to graduate, but also the experience I will gain throughout its completion. Working with drones and computer vision sounds very interesting to me because I have always liked drones and have never worked with computer vision. Automating the movements of a drone to play a board game will be really interesting, especially the algorithms involved with automating the actual game playing. Its also nice to work on a new project outside of the same old stuff at work. I'm curious about how many unforeseen technical challenges we will find. I enjoy solving problems and I am sure this project will contain many different problems to solve.
 
 !TODO preliminary approach
 
-• Final two paragraphs on your motivation and preliminary project approach –Discuss why you are motivated/excited to participate in the project
 
 –Discuss your preliminary approach to designing a solution –Discuss what your expected results and accomplishments will be –Discuss how you will evaluate your contributions: how will you know when you are done and whether or not you have done a good job?
 
