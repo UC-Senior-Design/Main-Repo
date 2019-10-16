@@ -37,20 +37,20 @@ This document describes our project's road map made up of milestones, a timeline
 🔥🔥 = medium effort
 🔥🔥🔥 = most effort
 
-| Task                                                                                                               | Assignee | Effort |
-| ------------------------------------------------------------------------------------------------------------------ | -------- | ------ |
-| Identify the capabilities of SDK for the Maverick drone                                                            | Matt     | 🔥🔥   |
-| Identify the limits of the SDK (find what sensors we can get data from)                                            | Matt     | 🔥🔥   |
-| Create prototype for testing drone                                                                                 | Matt     | 🔥     |
-| Build system for consuming data                                                                                    | Matt     | 🔥🔥   |
-| Build system for processing and manipulating data                                                                  | Matt     | 🔥🔥   |
-| Build system for flight control based on processed data                                                            | Matt     | 🔥🔥🔥 |
-| Identify visual sensors used in existing robot navigation applications                                             | Joseph   | 🔥🔥   |
-| Identify each sensor's capabilities and limits                                                                     | Joseph   | 🔥     |
-| Identify what algorithms are needed to successfully use the data from the sensors                                  | Joseph   | 🔥🔥   |
-| Devise plan for using visual sensors for navigation and determine what is lacking in the vision navigation         | Joseph   | 🔥🔥🔥 |
-| Identify non-visual sensors used in existing robot navigation applications                                         | Tanner   | 🔥🔥   |
-| Identify each sensor's capabilities and limits                                                                     | Tanner   | 🔥     |
-| Identify what sensor's can be used together                                                                        | Tanner   | 🔥     |
-| Identify what algorithms are needed to successfully use the data from the sensors                                  | Tanner   | 🔥🔥   |
-| Devise plan for using non-visual sensors for navigation and determine what is lacking in the non-vision navigation | Tanner   | 🔥🔥🔥 |
+| Task                                                                                                               | Assignee | Effort   |
+| ------------------------------------------------------------------------------------------------------------------ | -------- | -------- |
+| Identify the capabilities of SDK for the Maverick drone                                                            | Matt     | `🔥🔥`   |
+| Identify the limits of the SDK (find what sensors we can get data from)                                            | Matt     | `🔥🔥`   |
+| Create prototype for testing drone                                                                                 | Matt     | `🔥`     |
+| Build system for consuming data                                                                                    | Matt     | `🔥🔥`   |
+| Build system for processing and manipulating data                                                                  | Matt     | `🔥🔥`   |
+| Build system for flight control based on processed data                                                            | Matt     | `🔥🔥🔥` |
+| Identify visual sensors used in existing robot navigation applications                                             | Joseph   | `🔥🔥`   |
+| Identify each sensor's capabilities and limits                                                                     | Joseph   | `🔥`     |
+| Identify what algorithms are needed to successfully use the data from the sensors                                  | Joseph   | `🔥🔥`   |
+| Devise plan for using visual sensors for navigation and determine what is lacking in the vision navigation         | Joseph   | `🔥🔥🔥` |
+| Identify non-visual sensors used in existing robot navigation applications                                         | Tanner   | `🔥🔥`   |
+| Identify each sensor's capabilities and limits                                                                     | Tanner   | `🔥`     |
+| Identify what sensor's can be used together                                                                        | Tanner   | `🔥`     |
+| Identify what algorithms are needed to successfully use the data from the sensors                                  | Tanner   | `🔥🔥`   |
+| Devise plan for using non-visual sensors for navigation and determine what is lacking in the non-vision navigation | Tanner   | `🔥🔥🔥` |
