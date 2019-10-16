@@ -36,4 +36,4 @@ Non-Visual (RF, sonar, lidar, etc) navigation needs to be investigated to determ
 - Identify each sensor's capabilities and limits
 - Identify what sensor's can be used together
 - Identify what algorithms are needed to successfully use the data from the sensors
-- Devise plan for using non-visual sensors for navigation and determine what is lacking in the nonn-vision navigation
+- Devise plan for using non-visual sensors for navigation and determine what is lacking in the non-vision navigation
