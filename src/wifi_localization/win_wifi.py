@@ -222,6 +222,7 @@ class WiFiAp:
         ssid: str = ''
         auth: str = ''
         encrypt: str = ''
+        bssids: dict = {}
         bssid: str = ''
         strength: int = 0
 
@@ -240,13 +241,15 @@ class WiFiAp:
                 bssid = value.lower()
             elif line.startswith('         Signal'):
                 strength = int(value[:-1])
-        return cls(ssid=ssid, auth=auth, encrypt=encrypt, bssid=bssid, strength=strength, raw_data=raw_data)
+                bssids[bssid] = strength
+        return cls(ssid=ssid, auth=auth, encrypt=encrypt, bssids=bssids, bssid=bssid, strength=strength, raw_data=raw_data)
 
     def __init__(
             self,
             ssid: str = '',
             auth: str = '',
             encrypt: str = '',
+            bssids: dict = {},
             bssid: str = '',
             strength: int = 0,
             raw_data: str = '',
@@ -254,6 +257,7 @@ class WiFiAp:
         self._ssid: str = ssid
         self._auth: str = auth
         self._encrypt: str = encrypt
+        self._bssids: dict = bssids
         self._bssid: str = bssid
         self._strength: int = strength
         self._raw_data: str = raw_data
@@ -269,6 +273,10 @@ class WiFiAp:
     @property
     def encrypt(self) -> str:
         return self._encrypt
+
+    @property
+    def bssids(self) -> dict:
+        return self._bssids
 
     @property
     def bssid(self) -> str:
