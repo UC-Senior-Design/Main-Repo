@@ -1,0 +1,6 @@
+Current IP Address = 192.168.137.187
+Broadcast Range = 192.168.137.255
+Subnet Mask = 255.255.255.0
+
+Gateway = 192.168.137.1
+Destination = 192.168.137.0
