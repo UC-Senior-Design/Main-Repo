@@ -5,6 +5,8 @@ import json
 import os
 
 
+# This file will scan wifi RSSI values and save each scan to a json file
+
 # todo kalman filters
 #  https://www.wouterbulten.nl/blog/tech/kalman-filters-explained-removing-noise-from-rssi-signals/
 
@@ -27,6 +29,18 @@ def convert_rssi_to_meters(rssi_dbm):
     return d0 * math.pow(10, thing)
 
 
+def parse_with_distance(scan_content):
+    """
+    Given raw scan content from iwlist.parse(), will parse it into a known object with distance calculations
+    :param scan_content: raw scan content
+    :return: formatted scan data
+    """
+    parsed_cells = iwlist.parse(scan_content)
+    for cell in parsed_cells:
+        cell["distance"] = {"raw": convert_rssi_to_meters(float(cell["signal_level_dBm"])), "kalman": 0.0}  # todo kalman
+    return parsed_cells
+
+
 def scan_and_get_data(mac_whitelist=[]):
     """
     Will scan all AP, filter out any that do not match the mac_whitelist,
@@ -36,7 +50,7 @@ def scan_and_get_data(mac_whitelist=[]):
     """
     _scan_timestamp = datetime.datetime.now()
     scan_content = iwlist.scan(interface='wlan0')  # takes 3 or 4 seconds
-    _unfiltered_cells = iwlist.parse(scan_content)
+    _unfiltered_cells = parse_with_distance(scan_content)
     _filtered_cells = _unfiltered_cells
     if mac_whitelist is not None and len(mac_whitelist) > 0:
         _filtered_cells = [_i for _i in _unfiltered_cells if any(_sub in _i["mac"] for _sub in mac_whitelist)]
