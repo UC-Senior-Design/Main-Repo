@@ -3,6 +3,7 @@ import math
 import iwlist
 import json
 import os
+import sys
 
 
 # This file will scan wifi RSSI values and save each scan to a json file
@@ -125,4 +126,7 @@ def start_scan_loop(scan_count=50):
 
 
 if __name__ == '__main__':
-    start_scan_loop(10)
+    scan_count = 100
+    if len(sys.argv) > 1:
+        scan_count = sys.argv[1]
+    start_scan_loop(int(scan_count))
