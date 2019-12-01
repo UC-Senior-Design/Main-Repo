@@ -68,7 +68,7 @@ def save_data_to_file(_scan_data, _filename, scan_index):
     """
     with open(_filename, 'w') as fp:
         json.dump(_scan_data, fp, sort_keys=True, indent=4, default=str)
-        print("scan {} complete. saved data to {}".format(scan_index, _filename))
+        print(f"scan {scan_index} complete. saved data to {_filename}")
 
 
 def setup_storage():
@@ -106,20 +106,23 @@ def start_scan_loop(scan_count=50):
     # 28:6D:9E:9E:D4 (2.412GHz)
     # 28:6D:9E:9E:D0 (5.745GHz)
     access_point_in_living_room = ["28:6D:9E:9E:D4", "28:6D:9E:9E:D0"]
-    print("scanning {} times...".format(scan_count))
+    print(f"scanning {scan_count} times...")
     all_data = []
     empty_cell_data_count = 0
     for i in range(scan_count):
         scan_data = scan_and_get_data(access_point_in_living_room)
         if scan_data["cells"] is None or len(scan_data["cells"]) < 1:
             empty_cell_data_count += 1
-            i -= 1  # restart scan
-            print("scan {} failed, no cell data. nothing saved to file.".format(i))
+            i -= 1  # restart scan, don't know if this is the best idea, but it seems to work just fine
+            print(f"scan {i} failed, no cell data. nothing saved to file.")
         else:
             save_data_to_file(scan_data, get_save_file_path(scan_data["time"], i), i)
             all_data.append(scan_data)
-    print("scans with no data: {} of {} total scans".format(empty_cell_data_count, scan_count))
+    if empty_cell_data_count > 0:
+        print(f"scans with no data: {empty_cell_data_count} of {scan_count} total scans")
+    else:
+        print(f"all {scan_count} scans successful")
 
 
 if __name__ == '__main__':
-    start_scan_loop(100)
+    start_scan_loop(10)
