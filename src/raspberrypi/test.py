@@ -56,12 +56,13 @@ scan_count = 500
 print("scanning {} times...".format(scan_count))
 all_data = []
 empty_cell_data_count = 0
+scan_dir = "/home/pi/scan_data"
+if not os.path.exists(scan_dir):
+    os.mkdir(scan_dir)
 for i in range(scan_count):
     scan_data = scan_and_get_data(access_point_in_living_room)
     # save each scan to its own file, the filename being the timestamp
-    if not os.path.exists("data"):
-        os.mkdir("data")
-    filename = "data/{:%Y%m%d_%H_%M_%S.%f}_scan{}.json".format(scan_data["time"], i)
+    filename = "{}/{:%Y%m%d_%H_%M_%S.%f}_scan{}.json".format(scan_dir, scan_data["time"], i)
     with open(filename, 'wb') as fp:
         if scan_data["cells"] is None or len(scan_data["cells"]) < 1:
             empty_cell_data_count += 1
