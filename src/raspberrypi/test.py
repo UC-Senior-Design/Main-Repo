@@ -44,32 +44,68 @@ def scan_and_get_data(mac_whitelist=[]):
     return _data
 
 
-# closest AP mac addresses
-# 28:6D:9E:9E:D4 (2.412GHz)
-# 28:6D:9E:9E:D0 (5.745GHz)
-access_point_in_living_room = ["28:6D:9E:9E:D4", "28:6D:9E:9E:D0"]
-print(convert_rssi_to_meters(-22.5))
-scan_data = scan_and_get_data()
-# quit()
+def save_data_to_file(_scan_data, _filename, scan_index):
+    """
+    Save scan data to file
+    :param _scan_data: scan data
+    :param _filename: name and dir of file to save to
+    :param scan_index: scan index of all scans in the scan loop
+    :return: None
+    """
+    with open(_filename, 'w') as fp:
+        json.dump(_scan_data, fp, sort_keys=True, indent=4, default=str)
+        print("scan {} complete. saved data to {}".format(scan_index, _filename))
 
-scan_count = 500
-print("scanning {} times...".format(scan_count))
-all_data = []
-empty_cell_data_count = 0
-scan_dir = "/home/pi/scan_data"
-if not os.path.exists(scan_dir):
-    os.mkdir(scan_dir)
-for i in range(scan_count):
-    scan_data = scan_and_get_data(access_point_in_living_room)
-    # save each scan to its own file, the filename being the timestamp
-    filename = "{}/{:%Y%m%d_%H_%M_%S.%f}_scan{}.json".format(scan_dir, scan_data["time"], i)
-    with open(filename, 'wb') as fp:
+
+def setup_storage():
+    """
+    Sets up storage directory for all saved scan data
+    :return: scan directory
+    """
+    scan_dir = "/home/pi/scan_data"
+    if not os.path.exists(scan_dir):
+        os.mkdir(scan_dir)
+    return scan_dir
+
+
+def get_filename(scan_time, scan_index):
+    """
+    Returns the filename for a given scan
+    :param scan_time: time of scan
+    :param scan_index: scan index of all scans in the scan loop
+    :return: name of file for input scan
+    """
+    return f"{scan_time:%Y%m%d_%H_%M_%S.%f}_scan{scan_index}.json"
+
+
+def get_save_file_path(scan_time, scan_index):
+    return f"{setup_storage()}/{get_filename(scan_time, scan_index)}"
+
+
+def start_scan_loop(scan_count=50):
+    """
+    Scans and saves data of each scan to json file.
+    :param scan_count: number of times to scan
+    :return: None
+    """
+    # closest AP mac addresses
+    # 28:6D:9E:9E:D4 (2.412GHz)
+    # 28:6D:9E:9E:D0 (5.745GHz)
+    access_point_in_living_room = ["28:6D:9E:9E:D4", "28:6D:9E:9E:D0"]
+    print("scanning {} times...".format(scan_count))
+    all_data = []
+    empty_cell_data_count = 0
+    for i in range(scan_count):
+        scan_data = scan_and_get_data(access_point_in_living_room)
         if scan_data["cells"] is None or len(scan_data["cells"]) < 1:
             empty_cell_data_count += 1
+            i -= 1  # restart scan
             print("scan {} failed, no cell data. nothing saved to file.".format(i))
         else:
+            save_data_to_file(scan_data, get_save_file_path(scan_data["time"], i), i)
             all_data.append(scan_data)
-            json.dump(scan_data, fp, sort_keys=True, indent=4, default=str)
-            print("scan {} complete. saved data to {}".format(i, filename))
-print("scans with no data: {} of {} total scans".format(empty_cell_data_count, scan_count))
+    print("scans with no data: {} of {} total scans".format(empty_cell_data_count, scan_count))
 
+
+if __name__ == '__main__':
+    start_scan_loop(100)
