@@ -23,7 +23,7 @@ def convert_rssi_to_meters(rssi_dbm):
     :return: distance in meters
     """
     d0 = 1.0  # 1 meter from AP used in A0
-    A0 = -22.5  # referenced dBm value of AP at 1 meter distance
+    A0 = -22.5  # referenced dBm value of AP at 1 meter distance, this will be different if the client and AP are different than my original scan
     n = 2.0  # signal propagation exponent (normally 2 for indoor environments)
     # model -> RSSI = -10 * n * log10(d/d0) + A0
     thing = (rssi_dbm - A0) / (-10.0 * n)
@@ -132,12 +132,13 @@ def start_scan_loop(total_scans, mac_whitelist):
             print(f"scan {scan_count} complete. saved data to {filename}")
             all_data.append(scan_data)
             scan_count = increment_scan_count(scan_count, 1)  # continue to next scan
+    print("Scanning complete.")
     all_data_filename = save_data_to_file(all_data, get_save_file_path(datetime.datetime.now()))
-    print(f"all data saved to file: {all_data_filename}")
+    print(f"all scan data saved to file: {all_data_filename}")
     if empty_cell_data_count > 0:
-        print(f"done. scans with no data: {empty_cell_data_count} of {total_scans} total scans")
+        print(f"DONE | Number scans with no data: {empty_cell_data_count} of {total_scans} total scans")
     else:
-        print(f"done. all {total_scans} scans successful")
+        print(f"DONE | all {total_scans} scans successful")
 
 
 if __name__ == '__main__':
