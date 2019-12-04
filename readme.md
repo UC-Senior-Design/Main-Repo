@@ -32,19 +32,19 @@ strategies will be used simultaneously to achieve robust localization.
 
 ## Project Description
 
-[Project Description can be found here](https://github.com/UC-Senior-Design/Main-Repo/blob/master/Project-Description.md)
+[Project Description can be found here](https://github.com/UC-Senior-Design/Main-Repo/wiki/Project-Description)
 
 ## User Stories & Design Diagrams
 
-[User Stories can be found here](https://github.com/UC-Senior-Design/Main-Repo/blob/master/hw/user_stories/user_stories.md)
+[User Stories can be found here](https://github.com/UC-Senior-Design/Main-Repo/wiki/User-Stories)
 
 [Design Diagrams can be found here](https://github.com/UC-Senior-Design/Main-Repo/blob/master/hw/design_diagrams/Design%20Diagrams.pdf)
 
 ## Project Tasks & Timeline
 
-[Task list can be found here](https://github.com/UC-Senior-Design/Main-Repo/blob/master/hw/task_list/task_list.md)
+[Task list can be found here](https://github.com/UC-Senior-Design/Main-Repo/wiki/Task-List)
 
-[Timeline can be found here](https://github.com/UC-Senior-Design/Main-Repo/blob/master/hw/milestones/milestones.md)
+[Timeline can be found here](https://github.com/UC-Senior-Design/Main-Repo/wiki/Milestones)
 
 ## Project Presentation
 
