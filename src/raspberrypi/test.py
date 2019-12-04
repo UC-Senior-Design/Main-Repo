@@ -66,16 +66,16 @@ def scan_and_get_data(mac_whitelist=[]):
     return formatted_scan_data
 
 
-def save_data_to_file(_scan_data, _filename):
+def save_data_to_file(scan_data, filename):
     """
     Save scan data to file
-    :param _scan_data: scan data
-    :param _filename: name and dir of file to save to
+    :param scan_data: scan data
+    :param filename: name and dir of file to save to
     :return: None
     """
-    with open(_filename, 'w') as fp:
-        json.dump(_scan_data, fp, sort_keys=True, indent=4, default=str)
-    return _filename
+    with open(filename, 'w') as fp:
+        json.dump(scan_data, fp, sort_keys=True, indent=4, default=str)
+    return filename
 
 
 def setup_storage():
@@ -83,7 +83,7 @@ def setup_storage():
     Sets up storage directory for all saved scan data
     :return: scan directory
     """
-    scan_dir = "/home/pi/scan_data"
+    scan_dir = "/home/pi/scan_data"  # this can be changed if the data should be saved in a different dir
     if not os.path.exists(scan_dir):
         os.mkdir(scan_dir)
     return scan_dir
@@ -104,6 +104,12 @@ def get_save_file_path(scan_time, scan_index=-1):
 
 
 def increment_scan_count(scan_count, i):
+    """
+    Used to always keep scan_count equal to or greater than 0
+    :param scan_count: current count of scans
+    :param i: number to increment by
+    :return: scan_count >= 0
+    """
     if i < 0 and scan_count <= 0:
         return 0
     else:
@@ -146,7 +152,7 @@ if __name__ == '__main__':
     # 28:6D:9E:9E:D4 (2.412GHz)
     # 28:6D:9E:9E:D0 (5.745GHz)
     access_point_in_living_room = ["28:6D:9E:9E:D4", "28:6D:9E:9E:D0"]
-    _scan_count = 100
+    total_number_of_scans = 100
     if len(sys.argv) > 1:
-        _scan_count = int(sys.argv[1])
-    start_scan_loop(_scan_count, access_point_in_living_room)
+        total_number_of_scans = int(sys.argv[1])
+    start_scan_loop(total_number_of_scans, access_point_in_living_room)
