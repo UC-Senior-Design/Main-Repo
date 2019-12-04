@@ -61,12 +61,13 @@ strategies will be used simultaneously to achieve robust localization.
 ## Budget
 
 TODO
-Raspberry Pi 4 bundle https://vilros.com/collections/raspberry-pi-kits/products/vilros-raspberry-pi-4-model-b-basic-starter-kit-with-fan-cooled-clear-transparent-case?variant=29406580080734
-Raspberry Pi GPS Logger https://www.adafruit.com/product/746
-Raspberry Pi Battery Pack https://www.adafruit.com/product/4288
-3x Logitech HD WebCam C920 https://smile.amazon.com/Logitech-Widescreen-Calling-Recording-Desktop/dp/B006JH8T3S
-Drone?
-Flex?
+
+- Raspberry Pi 4 bundle https://vilros.com/collections/raspberry-pi-kits/products/vilros-raspberry-pi-4-model-b-basic-starter-kit-with-fan-cooled-clear-transparent-case?variant=29406580080734
+- Raspberry Pi GPS Logger https://www.adafruit.com/product/746
+- Raspberry Pi Battery Pack https://www.adafruit.com/product/4288
+- 3x Logitech HD WebCam C920 https://smile.amazon.com/Logitech-Widescreen-Calling-Recording-Desktop/dp/B006JH8T3S
+- Drone?
+- Flex?
 
 ## Appendix
 
