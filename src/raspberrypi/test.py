@@ -66,17 +66,16 @@ def scan_and_get_data(mac_whitelist=[]):
     return formatted_scan_data
 
 
-def save_data_to_file(_scan_data, _filename, scan_index):
+def save_data_to_file(_scan_data, _filename):
     """
     Save scan data to file
     :param _scan_data: scan data
     :param _filename: name and dir of file to save to
-    :param scan_index: scan index of all scans in the scan loop
     :return: None
     """
     with open(_filename, 'w') as fp:
         json.dump(_scan_data, fp, sort_keys=True, indent=4, default=str)
-        print(f"scan {scan_index} complete. saved data to {_filename}")
+    return _filename
 
 
 def setup_storage():
@@ -90,7 +89,7 @@ def setup_storage():
     return scan_dir
 
 
-def get_filename(scan_time, scan_index):
+def get_filename(scan_time, scan_index=-1):
     """
     Returns the filename for a given scan
     :param scan_time: time of scan
@@ -100,33 +99,45 @@ def get_filename(scan_time, scan_index):
     return f"{scan_time:%Y%m%d_%H_%M_%S.%f}_scan{scan_index}.json"
 
 
-def get_save_file_path(scan_time, scan_index):
+def get_save_file_path(scan_time, scan_index=-1):
     return f"{setup_storage()}/{get_filename(scan_time, scan_index)}"
 
 
-def start_scan_loop(scan_count, mac_whitelist):
+def increment_scan_count(scan_count, i):
+    if i < 0 and scan_count <= 0:
+        return 0
+    else:
+        return scan_count + i
+
+
+def start_scan_loop(total_scans, mac_whitelist):
     """
     Scans and saves data of each scan to json file.
     :param mac_whitelist: a list of mac addresses to white list the scan data
-    :param scan_count: number of times to scan
+    :param total_scans: number of times to scan
     :return: None
     """
-    print(f"scanning {scan_count} times...")
+    print(f"scanning {total_scans} times...")
     all_data = []
     empty_cell_data_count = 0
-    for i in range(scan_count):
+    scan_count = 0
+    while scan_count <= total_scans:
         scan_data = scan_and_get_data(mac_whitelist)
         if scan_data["cells"] is None or len(scan_data["cells"]) < 1:
             empty_cell_data_count += 1
-            i -= 1  # restart scan, don't know if this is the best idea, but it seems to work just fine
-            print(f"scan {i} failed, no cell data. nothing saved to file.")
+            scan_count = increment_scan_count(scan_count, -1)  # restart this scan
+            print(f"scan {scan_count} failed, no cell data. nothing saved to file.")
         else:
-            save_data_to_file(scan_data, get_save_file_path(scan_data["time"], i), i)
+            filename = save_data_to_file(scan_data, get_save_file_path(scan_data["time"], scan_count))
+            print(f"scan {scan_count} complete. saved data to {filename}")
             all_data.append(scan_data)
+            scan_count = increment_scan_count(scan_count, 1)  # continue to next scan
+    all_data_filename = save_data_to_file(all_data, get_save_file_path(datetime.datetime.now()))
+    print(f"all data saved to file: {all_data_filename}")
     if empty_cell_data_count > 0:
-        print(f"scans with no data: {empty_cell_data_count} of {scan_count} total scans")
+        print(f"done. scans with no data: {empty_cell_data_count} of {total_scans} total scans")
     else:
-        print(f"all {scan_count} scans successful")
+        print(f"done. all {total_scans} scans successful")
 
 
 if __name__ == '__main__':
