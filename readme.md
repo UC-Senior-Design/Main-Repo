@@ -71,14 +71,11 @@ TODO
 
 ## Appendix
 
-TODO
-
-- include appropriate references, citations, links to code repositories, and meeting notes.
-- there should be evidence justifying 45 hours of effort for each team member.
-
 ### Research
 
 #### Papers
+
+Mendeley Group: https://www.mendeley.com/community/gps-deprived-drones/
 
 - Decimeter-Level Localization with a Single WiFi Access Point (Vasisht D Kumar S Katabi D)
 - Multi-camera sensor system for 3D segmentation and localization of multiple mobile robots (Losada C Mazo M Palazuelos S Pizarro D Marrón M)
@@ -105,5 +102,3 @@ TODO
 - Cooperative monocular-based SLAM for multi-UAV systems in GPS-denied environments (Trujillo J Munguia R Guerra E Grau A)
 - Fast, autonomous flight in GPS-denied and cluttered environments (Mohta K Watterson M Mulgaonkar Y Liu S Qu C Makineni A Saulnier K Sun K Zhu A Delmerico J Karydis K Atanasov N Loianno G Scaramuzza D Daniilidis K Taylor C Kumar V)
 - Guidance and control for a mars helicopter (Grip H Scharf D Malpica C Johnson W Mandić M Singh G Young L)
-
-Mendeley Group: https://www.mendeley.com/community/gps-deprived-drones/
