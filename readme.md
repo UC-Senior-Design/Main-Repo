@@ -71,7 +71,34 @@ TODO
 
 ## Appendix
 
-TODO
+### Research
 
-- include appropriate references, citations, links to code repositories, and meeting notes.
-- there should be evidence justifying 45 hours of effort for each team member.
+#### Papers
+
+Mendeley Group: https://www.mendeley.com/community/gps-deprived-drones/
+
+- Decimeter-Level Localization with a Single WiFi Access Point (Vasisht D Kumar S Katabi D)
+- Multi-camera sensor system for 3D segmentation and localization of multiple mobile robots (Losada C Mazo M Palazuelos S Pizarro D Marrón M)
+- Marker localization with a multi-camera system (Szaloki D Koszo N Csorba K Tevesz G)
+- Efficient Optical Flow and Stereo Vision for Velocity Estimation and Obstacle Avoidance on an Autonomous Pocket Drone (McGuire K De Croon G De Wagter C Tuyls K Kappen H)
+- Obstacle Avoidance Strategy using Onboard Stereo Vision on a Flapping Wing MAV (Tijmons S De Croon G Remes B De Wagter C Mulder M)
+- CNN-SLAM: Real-time dense monocular SLAM with learned depth prediction (Tateno K Tombari F Laina I Navab N)
+- A pure vision-based approach to topological SLAM (Lui W Jarvis R)
+- Real-time 3D reconstruction on construction site using visual SLAM and UAV (Shang Z Shen Z)
+- LSD-SLAM: Large-Scale Direct monocular SLAM (Engel J Schöps T Cremers D)
+- SLAM and obstacle detection for tall autonomous robotic medical assistant (Zukowski M Matus K Kamienski D Kondratiuk M Ambroziak L Kuc B)
+- ORB-SLAM2: An Open-Source SLAM System for Monocular, Stereo, and RGB-D Cameras (Mur-Artal R Tardos J)
+- Monocular visual SLAM for small UAVs in GPS-denied environments (Wang C Wang T Liang J Chen Y Zhang Y Wang C)
+- A Kinect-based indoor mobile robot localization (Hamzeh O Elnagar A)
+- Indoor Dense Depth Map at Drone Hovering (Saha A Maity S Bhowmick B)
+- Evaluating SLAM approaches for microsoft kinect (Schindhelm C)
+- An MAV Localization and Mapping System Based on Dual Realsense Cameras (Bi Y Li J Qin H Lan M Shan M Lin F Chen B)
+- SLAM with D435i (Dorodnicov S)
+- Autonomous Flight in Unknown Indoor Environments (Bachrach A He R Roy N)
+- RANGE-Robust autonomous navigation in GPS-denied environments (Bachrach A Prentice S He R Roy N)
+- Visual 3-D SLAM from UAVs (Artieda J Sebastian J Campoy P Correa J Mondragón I Martínez C Olivares M)
+- Estimation, planning, and mapping for autonomous flight using an RGB-D camera in GPS-denied environments (Bachrach A Prentice S He R HenrY. P Huang A KrainiN. M Maturana D Fox D Roy N)
+- SVO: Semidirect Visual Odometry for Monocular and Multicamera Systems (Forster C Zhang Z Gassner M Werlberger M Scaramuzza D)
+- Cooperative monocular-based SLAM for multi-UAV systems in GPS-denied environments (Trujillo J Munguia R Guerra E Grau A)
+- Fast, autonomous flight in GPS-denied and cluttered environments (Mohta K Watterson M Mulgaonkar Y Liu S Qu C Makineni A Saulnier K Sun K Zhu A Delmerico J Karydis K Atanasov N Loianno G Scaramuzza D Daniilidis K Taylor C Kumar V)
+- Guidance and control for a mars helicopter (Grip H Scharf D Malpica C Johnson W Mandić M Singh G Young L)
