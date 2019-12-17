@@ -12,7 +12,7 @@ import sys
 #  https://www.wouterbulten.nl/blog/tech/kalman-filters-explained-removing-noise-from-rssi-signals/
 
 
-def convert_rssi_to_meters(rssi_dbm):
+def convert_rssi_to_meters(rssi_dbm, GHz=2.4):
     """
     Converts RSSI (dBm) to meters
     Maths stolen from here: https://www.wouterbulten.nl/blog/tech/kalman-filters-explained-removing-noise-from-rssi-signals/
@@ -23,7 +23,9 @@ def convert_rssi_to_meters(rssi_dbm):
     :return: distance in meters
     """
     d0 = 1.0  # 1 meter from AP used in A0
-    A0 = -22.5  # referenced dBm value of AP at 1 meter distance, this will be different if the client and AP are different than my original scan
+    A0 = -24  # referenced dBm value of AP at 1 meter distance, this will be different if the client and AP are different than my original scan
+    if GHz > 4:
+        A0 = -40
     n = 2.0  # signal propagation exponent (normally 2 for indoor environments)
     # model -> RSSI = -10 * n * log10(d/d0) + A0
     thing = (rssi_dbm - A0) / (-10.0 * n)
@@ -39,7 +41,7 @@ def parse_and_format(scan_content, scan_timestamp):
     """
     parsed_cells = iwlist.parse(scan_content)
     for cell in parsed_cells:
-        cell["distance"] = {"raw": convert_rssi_to_meters(float(cell["signal_level_dBm"])), "kalman": -1.0}  # todo kalman
+        cell["distance"] = {"raw": convert_rssi_to_meters(float(cell["signal_level_dBm"]), float(cell["frequency"])), "kalman": -1.0}  # todo kalman
         cell["time"] = scan_timestamp
     return parsed_cells
 
@@ -125,31 +127,26 @@ def start_scan_loop(total_scans, mac_whitelist):
     """
     print(f"scanning {total_scans} times...")
     all_data = []
-    empty_cell_data_count = 0
     scan_count = 0
-    last_scan_failed = False
+    last_scan_fail_count = 0
     while scan_count <= total_scans:
         scan_data = scan_and_get_data(mac_whitelist)
         if scan_data["cells"] is None or len(scan_data["cells"]) < 1:
-            empty_cell_data_count += 1
-            if not last_scan_failed:
-                last_scan_failed = True
+            if last_scan_fail_count < 1:
                 scan_count = increment_scan_count(scan_count, -1)  # restart this scan
-            print(f"scan {scan_count} failed, no cell data. nothing saved to file. trying again...")
+            last_scan_fail_count += 1
+            print(f"scan {scan_count} failed ({last_scan_fail_count} consecutive failures), no wifi data. nothing saved to file. trying again...")
         else:
             filename = save_data_to_file(scan_data, get_save_file_path(scan_data["time"], scan_count))
             print(f"scan {scan_count} complete. saved data to {filename}")
             all_data.append(scan_data)
             scan_count = increment_scan_count(scan_count, 1)  # continue to next scan
-            last_scan_failed = False
+            last_scan_fail_count = 0
 
     print("Scanning complete.")
     all_data_filename = save_data_to_file(all_data, get_save_file_path(datetime.datetime.now()))
     print(f"all scan data saved to file: {all_data_filename}")
-    if empty_cell_data_count > 0:
-        print(f"DONE | Number scans with no data: {empty_cell_data_count} of {total_scans} total scans")
-    else:
-        print(f"DONE | all {total_scans} scans successful")
+    print(f"DONE | all {total_scans} scans successful")
 
 
 if __name__ == '__main__':
