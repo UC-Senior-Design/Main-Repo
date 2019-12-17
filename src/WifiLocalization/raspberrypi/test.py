@@ -127,17 +127,22 @@ def start_scan_loop(total_scans, mac_whitelist):
     all_data = []
     empty_cell_data_count = 0
     scan_count = 0
+    last_scan_failed = False
     while scan_count <= total_scans:
         scan_data = scan_and_get_data(mac_whitelist)
         if scan_data["cells"] is None or len(scan_data["cells"]) < 1:
             empty_cell_data_count += 1
-            scan_count = increment_scan_count(scan_count, -1)  # restart this scan
-            print(f"scan {scan_count} failed, no cell data. nothing saved to file.")
+            if not last_scan_failed:
+                last_scan_failed = True
+                scan_count = increment_scan_count(scan_count, -1)  # restart this scan
+            print(f"scan {scan_count} failed, no cell data. nothing saved to file. trying again...")
         else:
             filename = save_data_to_file(scan_data, get_save_file_path(scan_data["time"], scan_count))
             print(f"scan {scan_count} complete. saved data to {filename}")
             all_data.append(scan_data)
             scan_count = increment_scan_count(scan_count, 1)  # continue to next scan
+            last_scan_failed = False
+
     print("Scanning complete.")
     all_data_filename = save_data_to_file(all_data, get_save_file_path(datetime.datetime.now()))
     print(f"all scan data saved to file: {all_data_filename}")
