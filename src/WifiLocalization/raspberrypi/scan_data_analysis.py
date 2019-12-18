@@ -91,9 +91,9 @@ for k in range(1, n_iter):
     P[k] = (1 - K[k]) * Pminus[k]
 
 plt.figure()
-plt.plot(z,'c.',label='unfiltered distance calculation')
-plt.plot(xhat,'b-',label='kalman estimate')
-plt.axhline(x,color='g',label='truth value')
+plt.plot(z, 'c.', label='unfiltered distance calculation')
+plt.plot(xhat, 'b-', label='kalman estimate')
+plt.axhline(x, color='g', label='truth value')
 plt.legend()
 plt.title('Distance Estimate vs. scan iteration', fontweight='bold')
 plt.xlabel('Iteration')
