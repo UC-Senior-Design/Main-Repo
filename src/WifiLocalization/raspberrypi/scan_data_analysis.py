@@ -57,45 +57,53 @@ print(
 
 # fucking stuff
 
-raw_distance_list = raw_distance_list[1500:]
+# raw_distance_list = raw_distance_list[1500:]
 
-# initial parameters
-n_iter = len(raw_distance_list)
-sz = (n_iter,)  # size of array
-x = 1  # truth value
-z = raw_distance_list  # observations (normal about x, sigma=0.1)
+def kalman(stuff):
+    # initial parameters
+    n_iter = len(stuff)
+    sz = (n_iter,)  # size of array
+    x = 1  # truth value
+    z = stuff  # observations (normal about x, sigma=0.1)
 
-Q = 0.00001  # process variance. was 1e-5
+    Q = 0.00001  # process variance. was 1e-5
 
-# allocate space for arrays
-xhat = np.zeros(sz)  # a posteri estimate of x
-P = np.zeros(sz)  # a posteri error estimate
-xhatminus = np.zeros(sz)  # a priori estimate of x
-Pminus = np.zeros(sz)  # a priori error estimate
-K = np.zeros(sz)  # gain or blending factor
+    # allocate space for arrays
+    xhat = np.zeros(sz)  # a posteri estimate of x
+    P = np.zeros(sz)  # a posteri error estimate
+    xhatminus = np.zeros(sz)  # a priori estimate of x
+    Pminus = np.zeros(sz)  # a priori error estimate
+    K = np.zeros(sz)  # gain or blending factor
 
-R = 0.1 ** 2  # estimate of measurement variance, change to see effect
+    R = 0.1 ** 2  # estimate of measurement variance, change to see effect
 
-# initial guesses
-xhat[0] = 1.0
-P[0] = 1.0
+    # initial guesses
+    xhat[0] = 1.0
+    P[0] = 1.0
 
-for k in range(1, n_iter):
-    # time update
-    xhatminus[k] = xhat[k - 1]
-    Pminus[k] = P[k - 1] + Q
+    for k in range(1, n_iter):
+        # time update
+        xhatminus[k] = xhat[k - 1]
+        Pminus[k] = P[k - 1] + Q
 
-    # measurement update
-    K[k] = Pminus[k] / (Pminus[k] + R)
-    xhat[k] = xhatminus[k] + K[k] * (z[k] - xhatminus[k])
-    P[k] = (1 - K[k]) * Pminus[k]
+        # measurement update
+        K[k] = Pminus[k] / (Pminus[k] + R)
+        xhat[k] = xhatminus[k] + K[k] * (z[k] - xhatminus[k])
+        P[k] = (1 - K[k]) * Pminus[k]
+    return xhat
+
+xhat_24 = kalman(raw_24)  # 2.4GHz
+xhat_5 = kalman(raw_5)  # 5GHz
 
 plt.figure()
-plt.plot(z, 'c.', label='unfiltered distance calculation')
-plt.plot(xhat, 'b-', label='kalman estimate')
-plt.axhline(x, color='g', label='truth value')
+plt.plot(raw_5, 'c.', label='5GHz unfiltered distance calculation')
+plt.plot(xhat_5, 'b-', label='5GHz kalman estimate')
+plt.plot(raw_24, 'm.', label='2.4GHz unfiltered distance calculation')
+plt.plot(xhat_24, 'r-', label='2.4GHz kalman estimate')
+
+plt.axhline(1, color='k', label='truth value')
 plt.legend()
-plt.title('Distance Estimate vs. scan iteration', fontweight='bold')
-plt.xlabel('Iteration')
+plt.title('Distance Estimate vs. Scan Iteration', fontweight='bold')
+plt.xlabel('Scan Iteration')
 plt.ylabel('Distance (m)')
 plt.show()
