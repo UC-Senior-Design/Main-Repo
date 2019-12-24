@@ -41,8 +41,9 @@ def parse_and_format(scan_content, scan_timestamp):
     """
     parsed_cells = iwlist.parse(scan_content)
     for cell in parsed_cells:
-        cell["distance"] = {"raw": convert_rssi_to_meters(float(cell["signal_level_dBm"]), float(cell["frequency"])), "kalman": -1.0}  # todo kalman
-        cell["time"] = scan_timestamp
+        if "frequency" in cell:
+            cell["distance"] = {"raw": convert_rssi_to_meters(float(cell["signal_level_dBm"])), "kalman": -1.0}  # todo kalman
+            cell["time"] = scan_timestamp
     return parsed_cells
 
 
