@@ -6,12 +6,14 @@ import test
 import statistics as statistics
 import numpy as np
 
-scan_file = "C:\\github\\SeniorDesign\\Main-Repo\\src\\WifiLocalization\\raspberrypi\\scan_data\\20191217_17_05_15.224575_scan-1.json"  # filename = ""
+scan_file = "C:\\github\\SeniorDesign\\Main-Repo\\src\\WifiLocalization\\raspberrypi\\scan_data\\20191224_00_42_08.534828_scan-1.json"  # filename = ""
 raw_distance_list = []
 raw_24 = []
 raw_5 = []
 raw_24_rssi = []
 raw_5_rssi = []
+reference_24 = -29.3
+reference_5 = -29.1
 # data = []
 with open(scan_file) as json_file:
     data = json.load(json_file)
@@ -19,16 +21,29 @@ with open(scan_file) as json_file:
     for scan_group in data:
         if "cells" in scan_group:
             for scan in scan_group["cells"]:
-                scan_distance = test.convert_rssi_to_meters(float(scan['signal_level_dBm']), float(scan['frequency']))
+                if float(scan['frequency']) > 4:
+                    raw_5_rssi.append(float(scan['signal_level_dBm']))
+                else:
+                    raw_24_rssi.append(float(scan['signal_level_dBm']))
+    reference_24 = statistics.mean(raw_24_rssi)
+    reference_5 = statistics.mean(raw_5_rssi)
+    for scan_group in data:
+        if "cells" in scan_group:
+            for scan in scan_group["cells"]:
+                scan_distance = 0
+                if float(scan['frequency']) > 4:
+                    scan_distance = test.convert_rssi_to_meters(float(scan['signal_level_dBm']), reference_5)
+                else:
+                    scan_distance = test.convert_rssi_to_meters(float(scan['signal_level_dBm']), reference_24)    
                 scan['distance']['raw'] = scan_distance
                 if scan_distance < 10:
                     raw_distance_list.append(scan_distance)
                     if float(scan['frequency']) > 4:
                         raw_5.append(scan_distance)
-                        raw_5_rssi.append(float(scan['signal_level_dBm']))
+                        # raw_5_rssi.append(float(scan['signal_level_dBm']))
                     else:
                         raw_24.append(scan_distance)
-                        raw_24_rssi.append(float(scan['signal_level_dBm']))
+                        # raw_24_rssi.append(float(scan['signal_level_dBm']))
                     # data.append(scan)
             scan_count += 1
 

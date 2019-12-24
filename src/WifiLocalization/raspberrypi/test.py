@@ -12,20 +12,18 @@ import sys
 #  https://www.wouterbulten.nl/blog/tech/kalman-filters-explained-removing-noise-from-rssi-signals/
 
 
-def convert_rssi_to_meters(rssi_dbm, GHz=2.4):
+def convert_rssi_to_meters(rssi_dbm, reference_dBm=-29):
     """
     Converts RSSI (dBm) to meters
     Maths stolen from here: https://www.wouterbulten.nl/blog/tech/kalman-filters-explained-removing-noise-from-rssi-signals/
-    >>> convert_rssi_to_meters(-22.5)
-    1.0
-
+    :param GHz: GHz of frequency used for the rssi reading
     :param rssi_dbm: RSSI in dBm
     :return: distance in meters
     """
     d0 = 1.0  # 1 meter from AP used in A0
-    A0 = -24  # referenced dBm value of AP at 1 meter distance, this will be different if the client and AP are different than my original scan
-    if GHz > 4:
-        A0 = -40
+    A0 = reference_dBm  # -29.30  # referenced dBm value of AP at 1 meter distance, this will be different if the client and AP are different than my original scan
+    # if GHz > 4:
+        # A0 = -29.1
     n = 2.0  # signal propagation exponent (normally 2 for indoor environments)
     # model -> RSSI = -10 * n * log10(d/d0) + A0
     thing = (rssi_dbm - A0) / (-10.0 * n)
