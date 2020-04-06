@@ -4,19 +4,7 @@ import cv2
 import detect
 import time
 import random
-p = re.compile(r"run_(\d+\.\d+)__cam_(\d)__snap_(\d+)_(\d+.\d+).png")
-
-def getFileInfo(file):
-    match = p.match(file)
-    if match is None:
-        return None
-    return {
-        "path": file,
-        "run": match.group(1),
-        "camera": match.group(2),
-        "snapIndex": match.group(3),
-        "snapTime": match.group(4),
-    }
+import ioutils
 
 def getLedPosition(fileInfo):
     img = cv2.imread('./out/' + fileInfo['path'])
@@ -33,7 +21,7 @@ def getLedPosition(fileInfo):
 
 
 def run():
-    files = map(getFileInfo, os.listdir('./out'))
+    files = map(ioutils.getFileInfo, os.listdir('./out'))
     files = list(filter(lambda f: f is not None, files))
     random.shuffle(files)
     total = len(files)

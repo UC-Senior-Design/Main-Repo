@@ -39,7 +39,23 @@ def best_contour(hsv_image):
 def showInMovedWindow(winname, img, x, y):
     cv2.namedWindow(winname)        # Create a named window
     cv2.moveWindow(winname, x, y)   # Move it to (x,y)
-    cv2.imshow(winname,img)
+    cv2.imshow(winname, img)
+    cv2.waitKey(5)
+
+def fit_windows(names, images, x, max_y):
+    window_height = (max_y - 30 * len(names)) / len(names)
+    scale = window_height / images[0].shape[0]
+    window_width = images[0].shape[1] * scale
+    for i in range(len(names)):
+        cv2.namedWindow(names[i], 0)
+        cv2.moveWindow(names[i], x, int((window_height + 30) * i))
+        cv2.resizeWindow(names[i], int(window_width), int(window_height))
+        cv2.imshow(names[i], images[i])
+        cv2.waitKey(5)
+    return window_width
+
+
+
 
 # old function
 def find_led_center(hsv_image):
