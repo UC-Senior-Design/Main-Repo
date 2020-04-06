@@ -11,6 +11,8 @@
   - [Professional Biographies](#professional-biographies)
   - [Budget](#budget)
   - [Appendix](#appendix)
+    - [Research](#research)
+      - [Papers](#papers)
 
 ## Project Abstraction
 
@@ -33,6 +35,8 @@ strategies will be used simultaneously to achieve robust localization.
 ## Project Description
 
 [Project Description can be found here](https://github.com/UC-Senior-Design/Main-Repo/wiki/Project-Description)
+
+https://www.youtube.com/watch?v=YBAmAesEE_g
 
 ## User Stories & Design Diagrams
 
