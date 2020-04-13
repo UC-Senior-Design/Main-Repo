@@ -17,7 +17,7 @@
 
 ## Demo
 
-[![Demo of localization](https://i.imgur.com/6taE3JM.gif)](https://www.youtube.com/watch?v=M_b4fiXxZLQ)
+[![Demo of localization](demo.gif)](https://www.youtube.com/watch?v=M_b4fiXxZLQ)
 
 ## Project Abstraction
 
