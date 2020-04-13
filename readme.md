@@ -1,6 +1,7 @@
 # Senior Design GPS Deprived Localization Research Project 2019/2020
 
 - [Senior Design GPS Deprived Localization Research Project 2019/2020](#senior-design-gps-deprived-localization-research-project-20192020)
+  - [Demo](#demo)
   - [Project Abstraction](#project-abstraction)
     - [Team](#team)
   - [Project Description](#project-description)
@@ -13,6 +14,10 @@
   - [Appendix](#appendix)
     - [Research](#research)
       - [Papers](#papers)
+
+## Demo
+
+[![Demo of localization](https://i.imgur.com/6taE3JM.gif)](https://www.youtube.com/watch?v=M_b4fiXxZLQ)
 
 ## Project Abstraction
 
