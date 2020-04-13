@@ -21,23 +21,30 @@ def getLedPosition(fileInfo):
 
 
 def run():
-    files = map(ioutils.getFileInfo, os.listdir('./out'))
-    files = list(filter(lambda f: f is not None, files))
-    random.shuffle(files)
+    files = ioutils.get_all_file_info('./out')
+    snaps = sorted(list(set(map(lambda file: int(file['snapIndex']), files))))
+
+    line = {}
+    cameras = ["0", "1", "3"]
+
     total = len(files)
     processed = 0
     found = 0
-    for file in files:
-        pos = getLedPosition(file)
-        processed += 1
-        if pos is None:
-            print('Failure on: {}'.format(file['path']))
-        else:
-            found += 1
-        if (processed % 100 == 0):
-            print("Processed {0} of {1}. Found {2} of {1} ({3:.2f}%)".format(processed, total, found, 100 * found / processed))
-        # if (file['camera'] == '3'):
-        #     time.sleep(1)
+    for snap in snaps:
+        line = {"action": "detect", "capture_index": snap, "cams": {}}
+        for camera in cameras:
+            file = next(file for file in files if int(file["snapIndex"]) == snap and file["camera"] == camera)
+            pos = getLedPosition(file)
+            line["cams"][camera] = pos
+            processed += 1
+            if pos is None:
+                print('Failure on: {}'.format(file['path']))
+            else:
+                found += 1
+            if (processed % 100 == 0):
+                print("Processed {0} of {1}. Found {2} of {1} ({3:.2f}%)".format(processed, total, found, 100 * found / processed))
+        ioutils.appendLineToNLJ('leds.ndjson', line)
+
 
 run()
 print('script done')

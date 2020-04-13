@@ -82,6 +82,7 @@ def run():
     files = ioutils.get_all_file_info('./drone')
     snaps = sorted(list(set(map(lambda file: int(file['snapIndex']), files))))
     for snap in snaps:
+        line = {"action": "detect", "capture_index": snap, "cams": {}}
         for camera in cameras.keys():
             file = next(file for file in files if int(file["snapIndex"]) == snap and file["camera"] == camera)
             baseline = cameras[camera]['baseline']
@@ -117,10 +118,11 @@ def run():
             detect.fit_windows(list(map(lambda x: x + camera, window_names)), window_images, x, 1100)
             drone_contour = get_likely_drone_contour(contours)[0]
             drone_rect = cv2.boundingRect(drone_contour)
+            line["cams"][camera] = drone_rect
             cameras[camera]['baseline'] = create_new_background(cameras[camera]['baseline'], image, drone_rect)
+        ioutils.appendLineToNLJ('drones.ndjson', line)
         time.sleep(0.1)
     
-while True:
-    run()
-    cv2.waitKey(10)
+run()
+cv2.waitKey(10)
 

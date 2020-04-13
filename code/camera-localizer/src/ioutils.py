@@ -1,4 +1,4 @@
-import os, time, json, cv2, re
+import os, time, json, cv2, re, csv
 p = re.compile(r"run_(\d+\.\d+)__cam_(\d)__snap_(\d+)_(\d+.\d+).png")
 
 
@@ -21,9 +21,10 @@ def getFileInfo(file):
         "path": file,
         "run": match.group(1),
         "camera": match.group(2),
-        "snapIndex": match.group(3),
-        "snapTime": match.group(4),
+        "snapIndex": int(match.group(3)),
+        "snapTime": float(match.group(4)),
     }
+
 
 def save_image(image, run_id, camera_name, capture_index):
     path = os.path(
@@ -42,3 +43,42 @@ def appendLineToNLJ(path, object):
     line = json.dumps(object)
     with open(path, "a") as file:
         file.write(line + "\n")
+
+def ndjsonToDictArray(path):
+    out = []
+    with open(path) as f:
+        for line in f:
+            out.append(json.loads(line))
+    return out
+
+def load_results_csv(path):
+    out = []
+    with open(path, newline='') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"')
+        for row in csv_reader:
+            if row[0] == 'snap_index':
+                continue
+            out.append({
+                "snapIndex": int(row[0]),
+                "cameras": {
+                    "1": {
+                        "x": float(row[1]),
+                        "y": float(row[2]),
+                    },
+                    "2": {
+                        "x": float(row[3]),
+                        "y": float(row[4]),
+                    },
+                    "3": {
+                        "x": float(row[5]),
+                        "y": float(row[6]),
+                    },
+                },
+                "x": float(row[7]),
+                "y": float(row[8]),
+                "z": float(row[9]),
+            })
+    return out
+
+def overlay_image_alpha(parent, overlay, pos):
+    parent[pos[1]:pos[1]+overlay.shape[0], pos[0]:pos[0]+overlay.shape[1]] = overlay
