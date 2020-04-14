@@ -41,7 +41,7 @@ strategies will be used simultaneously to achieve robust localization.
 
 [Project Description can be found here](https://github.com/UC-Senior-Design/Main-Repo/wiki/Project-Description)
 
-https://www.youtube.com/watch?v=YBAmAesEE_g
+[Project Description Video](https://www.youtube.com/watch?v=YBAmAesEE_g)
 
 ## User Stories & Design Diagrams
 
