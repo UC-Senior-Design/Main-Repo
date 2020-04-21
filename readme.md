@@ -6,6 +6,10 @@
   - [Project Abstraction](#project-abstraction)
     - [Team](#team)
   - [Project Description](#project-description)
+  - [Final Presentation PowerPoint](#final-presentation-powerpoint)
+  - [Final Self Assessments](#final-self-assessments)
+    - [Joseph Krusling](#joseph-krusling)
+    - [Tanner Bornemann](#tanner-bornemann)
   - [User Stories & Design Diagrams](#user-stories--design-diagrams)
   - [Project Tasks & Timeline](#project-tasks--timeline)
   - [Project Presentation](#project-presentation)
@@ -47,6 +51,26 @@ strategies will be used simultaneously to achieve robust localization.
 [Project Description can be found here](https://github.com/UC-Senior-Design/Main-Repo/wiki/Project-Description)
 
 [Project Description Video](https://www.youtube.com/watch?v=YBAmAesEE_g)
+
+## Final Presentation PowerPoint
+
+[Final Presentation Slides](https://docs.google.com/presentation/d/16rOYFmPqiy3v9u1N-_m7KnntrKwo8C93bKVkQVXkits/edit?usp=sharing)
+
+## Final Self Assessments
+
+### Joseph Krusling
+
+My primary contribution to the project was designing and programming the optical drone tracking system. I developed the computer vision code which could detect the drone (or training marker) in a series of images, as well as the feed-forward neural network which mapped a set of drone positions in 2D space into a position in 3D space. Combined, these components form a system that allows for a drone to be tracked in real time. We consider this system to be extremely successful. While it's only a prototype, we achieved impressive accuracy and precision using only consumer-grade cameras and compute. I believe that our system can be scaled up to serve useful real-world applications that involve object localization.
+
+
+My biggest obstacle was finding comparable research. What we're doing is somewhat novel, so we had to draw a wide net and combine tools and ideas from multiple places. While I'm overjoyed with where our team ended up at the end of the project, the path to get here was beset on all sides by knowledge gaps, frustration, and doubts about whether we were pursuing the right problem. Last semester I identified that one of my greatest strengths is the ability to learn new tools while on the job. Since I came into this project with very little computer vision experience, this skill was essential for developing the knowledge needed to develop the tracking system. This semester taught me so much about machine learning and computer vision, but I still know a very small fraction of what I want to.
+
+### Tanner Bornemann
+
+My individual contribution was mostly the research done on Wi-Fi RSSI Localization. This consisted of identifying how others have used RSSI for localization in the past and if it was possible to use or to build onto what others have done for our project. I eventually came to the conclusion that RSSI localization was not usable for our goal of GPS Deprived UAV Localization. After this was completed I worked on the implementation of the Optical Localization we use in our final project demonstration.
+
+
+The majority of my obstacles were finding research on Wi-Fi RSSI Localization and understanding the existing research. Then trying to figure out if we can apply what I learned to our end goal. I learned a lot through applying the actual research and was surprised by my ability to read academic papers on the subject. This wasn’t something I was good at early in my academic career.
 
 ## User Stories & Design Diagrams
 
