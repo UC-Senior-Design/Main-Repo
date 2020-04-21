@@ -1,0 +1,1 @@
+This python project collects wifi data using a raspberry pi.
