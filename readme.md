@@ -3,6 +3,7 @@
 - [Senior Design GPS Deprived Localization Research Project 2019/2020](#senior-design-gps-deprived-localization-research-project-20192020)
   - [Demo](#demo)
   - [Senior Design Poster](#senior-design-poster)
+  - [Senior Design Final Video](#senior-design-final-video)
   - [Project Abstraction](#project-abstraction)
     - [Team](#team)
   - [Project Description](#project-description)
@@ -27,6 +28,10 @@
 ## Senior Design Poster
 
 [Senior Design Poster](https://github.com/UC-Senior-Design/Main-Repo/blob/master/SeniorDesignPosterDraft.pdf)
+
+## Senior Design Final Video
+
+[Senior Design Final Video](https://youtu.be/01NDcZ3MC9Q)
 
 ## Project Abstraction
 
